@@ -3,11 +3,14 @@ import javax.swing.JOptionPane;
 public class piculka {
 
 	public static void main(String[] args) {
-		String izvele, vards, adrese;
+		//https://stock.adobe.com/search?k=pizza+png
+		
+		String izvele, vards, persvards, adrese;
 		int talrun;
 		String[] persona = {"Pircejs", "Personāls"};
 		
 		String[] darbibas = {"Menu", "Iegadies picu", "Mainit savu info", "Iziet no programmas"};
+		String[] picas = {"Margarita", "Studenta","Piperoni", "Vistas","BBQ", "Assa pica"};
 		JOptionPane.showMessageDialog(null, "Sveiki picas piedages porgramma!");
 		izvele = (String)JOptionPane.showInputDialog(null, "Kas jūs esat?",
 				"Reģistrācija", JOptionPane.QUESTION_MESSAGE,
@@ -24,7 +27,7 @@ public class piculka {
 			switch(izvele) {
 			
 			case "Menu":
-				//...
+				JOptionPane.showOptionDialog(null, "Apskatīt picu", "Pica", 0, 2, null, picas, picas[0]);
 				break;
 			case "Iegadies picu":
 				//...
@@ -41,7 +44,8 @@ public class piculka {
 			
 			
 		}else if(izvele == "Personāls") {
-			//.......
+			persvards = (String)JOptionPane.showInputDialog(null, "Ievadiet savu vardu: ");
+			//šeit būs fails ar vardiem, kuram pieļauti izmantot personala funkcijas un salidzinašana
 		}
 		
 		
