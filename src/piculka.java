@@ -3,12 +3,10 @@ import javax.swing.JOptionPane;
 public class piculka {
 
 	public static void main(String[] args) {
-		//https://stock.adobe.com/search?k=pizza+png
-		
 		String izvele, vards, persvards, adrese, telefons;
 		String[] persona = {"Pircejs", "Personāls"};
 		
-		String[] darbibas = {"Menu", "Iegadies picu", "Mainit savu info", "Iziet no programmas"};
+		String[] darbibas = {"Menu", "Iegadies picu", "Apskatīt savu info", "Mainit savu info", "Iziet no programmas"};
 		String[] picas = {"Margarita", "Studenta","Piperoni", "Vistas","BBQ", "Assa pica"};
 		JOptionPane.showMessageDialog(null, "Sveiki picas piedages porgramma!");
 		izvele = (String)JOptionPane.showInputDialog(null, "Kas jūs esat?",
@@ -51,7 +49,9 @@ public class piculka {
 			switch(izvele) {
 			
 			case "Menu":
-				JOptionPane.showOptionDialog(null, "Apskatīt picu", "Pica", 0, 2, null, picas, picas[0]);
+				//https://stock.adobe.com/search?k=pizza+png
+				JOptionPane.showOptionDialog(null, "Apskatīt picu", "Pica", 0, JOptionPane.QUESTION_MESSAGE, null, picas, picas[0]);
+				
 				break;
 			case "Iegadies picu":
 				//...
