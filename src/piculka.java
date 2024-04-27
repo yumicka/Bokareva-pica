@@ -25,8 +25,9 @@ public class piculka {
 	public static void main(String[] args) {
 		String izvele, vards, persvards, adrese, telefons;
 		ArrayList<Object> pasutijumi = new ArrayList<Object>();
+		ArrayList<Object> klients = new ArrayList<Object>();
 		
-		String[] darbibas = {"Menu", "Iegadies picu", "Apskatīt pasūtijumus", "Apskatīt savu info", "Mainit savu info",
+		String[] darbibas = {"Menu", "Iegadies picu", "Apskatīt pasūtijumus", "Saņemt pasūtijumu", "Apskatīt savu info", "Mainit savu info",
 				"Iziet no programmas"};
 		String[] picas = {"Margarita", "Studenta", "Piperoni", "Vistas","BBQ", "Assa pica"};
 		JOptionPane.showMessageDialog(null, "Sveiki picas piedages porgramma!");
@@ -58,7 +59,7 @@ public class piculka {
 				
 			}while(!pareizi);
 			int talrun = Integer.parseInt(telefons);
-			Pircejs pirc = new Pircejs(vards, adrese, talrun);
+			klients.add(new Pircejs(vards, adrese, talrun));
 			do {
 			izvele = (String)JOptionPane.showInputDialog(null, "Izveleties funkciju:", "Izvele",
 					JOptionPane.QUESTION_MESSAGE, null, darbibas, darbibas[0]);
@@ -98,7 +99,7 @@ public class piculka {
 				String[] izmiers = {"30", "40", "50"};
 				String[] jane = {"Jā", "Nē"};
 				String[] pasutit = {"Saņemt uz vietas", "Piegādāt"};
-				String merce = "";
+				String merce = "", nosaukums = "";
 				int lielums;
 				boolean dubsiers = false, piegade = false;
 				izvele = (String)JOptionPane.showInputDialog(null, "Izvēlieties picu, kuru"
@@ -109,16 +110,19 @@ public class piculka {
 				
 				
 				if(izvelesIndekss == 0) {
+					nosaukums = "Margarita";
 					merce = "Tomatu merce";
 					sastavdalas.add("Siers");
 				}
 				if(izvelesIndekss == 1) {
+					nosaukums = "Studenta";
 					merce = "Tomatu merce";
 					sastavdalas.add("Siers");
 					sastavdalas.add("Cīsiņi");
 				}
 				
 				if(izvelesIndekss == 2) {
+					nosaukums = "Piperoni";
 					merce = "Tomatu merce";
 					sastavdalas.add("Siers");
 					sastavdalas.add("Salami");
@@ -126,6 +130,7 @@ public class piculka {
 				}
 				
 				if(izvelesIndekss == 3) {
+					nosaukums = "Vistas";
 					merce = "Majonēze";
 					sastavdalas.add("Siers");
 					sastavdalas.add("Vista");
@@ -133,6 +138,7 @@ public class piculka {
 				}
 				
 				if(izvelesIndekss == 4) {
+					nosaukums = "BBQ";
 					merce = "BBQ merce";
 					sastavdalas.add("Siers");
 					sastavdalas.add("Vista");
@@ -141,6 +147,7 @@ public class piculka {
 				}
 				
 				if(izvelesIndekss == 5) {
+					nosaukums = "Assa pica";
 					merce = "Majonēze";
 					sastavdalas.add("Siers");
 					sastavdalas.add("Asie pipari");
@@ -150,6 +157,8 @@ public class piculka {
 				}
 				
 				if(izvelesIndekss == 6){
+					
+					nosaukums = "Pašī izveidota";
 					
 					//sastavdalas izvele
 					
@@ -215,11 +224,24 @@ public class piculka {
 					if(pieg == 1)
 						piegade = false;
 
-					pasutijumi.add(new Pica(lielums, merce, sastavdalas, dubsiers, piedavajums, piegade));
+					pasutijumi.add(new Pica(nosaukums, lielums, merce, sastavdalas, dubsiers, piedavajums, piegade));
 					JOptionPane.showMessageDialog(null, "Pasūtījums ir akceptēts!");
 				
 			}
+				break;
+				
+			case "Apskatīt pasūtijumus":
+				if(pasutijumi.size() > 0) {
+				String saraksts = "";
+				for(int i = 0; i<pasutijumi.size(); i++) {
+					saraksts+=((Pircejs)klients.get(i)).info();
+					saraksts+= ((Pica)pasutijumi.get(i)).info();
+					}
+					JOptionPane.showMessageDialog(null, saraksts, "Pasutījumi", JOptionPane.INFORMATION_MESSAGE);
 					
+				}else
+					JOptionPane.showMessageDialog(null, "Nav nepiegādātu pasūtījumu!",
+							"Pasūtijumus nav", JOptionPane.ERROR_MESSAGE);
 				break;
 				
 			case "Apskatīt savu info":
