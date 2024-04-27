@@ -287,16 +287,27 @@ public class piculka {
 				if(pasutijumi.size() > 0) {
 					int izmers = pasutijumi.size() - 1;
 					String nosauk = ((Pica)pasutijumi.get(izmers)).getNosaukums();
-					String adresik = ((Pircejs)klients.get(0)).getVards();
+					String adresik = ((Pircejs)klients.get(0)).getAdrese();
 					Object sanemts = pasutijumi.get(izmers);
 					pasutijumi.remove(izmers);
 					sanemtie.add(sanemts);
-					JOptionPane.showMessageDialog(null, "Nosutīta pica: "+nosauk+
-							"\nUz adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Pica "+nosauk+
+							"\n saņēmta uz adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
 				}
 				break;
 				
 			case "Saņemtie pasutījumi":
+				if(sanemtie.size() > 0) {
+					String saraksts = "";
+					for(int i = 0; i<sanemtie.size(); i++) {
+						saraksts+=((Pircejs)klients.get(i)).info();
+						saraksts+= ((Pica)sanemtie.get(i)).info();
+						}
+						JOptionPane.showMessageDialog(null, saraksts, "Pasutījumi", JOptionPane.INFORMATION_MESSAGE);
+						
+					}else
+						JOptionPane.showMessageDialog(null, "Nav piegādātus pasūtījumus!",
+								"Pasūtijumus nav", JOptionPane.ERROR_MESSAGE);
 				break;
 				
 			case "Apskatīt savu info":
