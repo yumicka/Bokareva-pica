@@ -64,27 +64,31 @@ public class piculka {
 	}
 
 	public static void main(String[] args) {
-		String izvele, vards, persvards, adrese, telefons;
+		String izvele, vards, adrese;
 		int talrun;
 		ArrayList<Object> pasutijumi = new ArrayList<Object>();
 		ArrayList<Object> sanemtie = new ArrayList<Object>();
 		ArrayList<Object> klients = new ArrayList<Object>();
 		
+		ImageIcon logo = new ImageIcon("logo.png");
+		
 		
 		String[] darbibas = {"Menu", "Iegadies picu", "Apskatīt pasūtijumus", "Saņemt pasūtijumu", "Saņemtie pasutījumi" ,"Apskatīt savu info", "Mainit savu info",
 				"Iziet no programmas"};
 		String[] picas = {"Margarita", "Studenta", "Piperoni", "Vistas","BBQ", "Assa pica"};
-		JOptionPane.showMessageDialog(null, "Sveiki picas piedages porgramma!");
+		JOptionPane.showMessageDialog(null, "Sveiki picas piedages porgramma!", "Sveiki!", JOptionPane.INFORMATION_MESSAGE, logo);
+		
 			
 			vards = KadsVards();
 	
 			adrese = KadaAdrese();
 			
 			talrun = KadsTalrun();
-			klients.add(new Pircejs(vards, adrese, KadsTalrun()));
+			
+			klients.add(new Pircejs(vards, adrese, talrun));
 			do {
 			izvele = (String)JOptionPane.showInputDialog(null, "Izveleties funkciju:", "Izvele",
-					JOptionPane.QUESTION_MESSAGE, null, darbibas, darbibas[0]);
+					JOptionPane.QUESTION_MESSAGE, logo, darbibas, darbibas[0]);
 			switch(izvele) {
 			
 			case "Menu":
@@ -293,8 +297,8 @@ public class piculka {
 				if(pasutijumi.size() > 0) {
 				String saraksts = "";
 				for(int i = 0; i<pasutijumi.size(); i++) {
-					saraksts+=((Pircejs)klients.get(i)).info();
-					saraksts+= ((Pica)pasutijumi.get(i)).info();
+					saraksts+=((Pircejs)klients.get(0)).info();
+					saraksts+= ((Pica)pasutijumi.get(i)).info()+"\n\n";
 					}
 					JOptionPane.showMessageDialog(null, saraksts, "Pasutījumi", JOptionPane.INFORMATION_MESSAGE);
 					
@@ -311,7 +315,7 @@ public class piculka {
 					Object sanemts = pasutijumi.get(izmers);
 					pasutijumi.remove(izmers);
 					sanemtie.add(sanemts);
-					JOptionPane.showMessageDialog(null, "Pica "+nosauk+ "saņēmta pie adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Pica "+nosauk+ " saņēmta pa adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
 				}
 				break;
 				
@@ -322,7 +326,7 @@ public class piculka {
 						saraksts+=((Pircejs)klients.get(i)).info();
 						saraksts+= ((Pica)sanemtie.get(i)).info();
 						}
-						JOptionPane.showMessageDialog(null, saraksts, "Pasutījumi", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, saraksts, "Saņemtie pasutījumi", JOptionPane.INFORMATION_MESSAGE);
 						
 					}else
 						JOptionPane.showMessageDialog(null, "Nav piegādātus pasūtījumus!",
