@@ -21,9 +21,51 @@ public class piculka {
 		JOptionPane.showMessageDialog(null, "Nospiediet OK, lai aizvērt un turpināt");
 		fr.setVisible(false);
 	}
+	
+	static String KadsVards() {
+		String vards;
+		do {
+			vards = (String)JOptionPane.showInputDialog(null, "Jūsu vārds: ");
+			}while(vards.length() <3);
+		return vards;
+	}
+	
+	static String KadaAdrese() {
+		boolean pareizi = false;
+		String adrese;
+		do {
+			adrese = (String) JOptionPane.showInputDialog(null, "Ievādies savu adresi:\n(... iela ...-...)");
+			if (adrese.matches(".* iela \\d+-\\d+"))
+				pareizi = true;
+			else {
+				JOptionPane.showMessageDialog(null, "Adrese ievadita nekorekti!"
+						+ "\nPareizais variants: {ielas nosaukums} iela {ielas numurs} - {dzivoklis}");
+				pareizi = false;
+			}
+		}while(!pareizi);
+		return adrese;
+	}
+	
+	static int KadsTalrun() {
+		boolean pareizi = false;
+		String telefons;
+		do {
+			telefons = (String)JOptionPane.showInputDialog("Ievadiet talruni: (bez +371)");
+			if (telefons.matches("2\\d{7}"))
+				pareizi = true;
+			else {
+				JOptionPane.showMessageDialog(null, "Telefona nurums ievadts nekorekti!"
+						+ "\nTelefona numura nevar būt +371 un mazāk par 8 simboliem");
+			}
+			
+		}while(!pareizi);
+		int talrun = Integer.parseInt(telefons);
+		return talrun;
+	}
 
 	public static void main(String[] args) {
 		String izvele, vards, persvards, adrese, telefons;
+		int talrun;
 		ArrayList<Object> pasutijumi = new ArrayList<Object>();
 		ArrayList<Object> sanemtie = new ArrayList<Object>();
 		ArrayList<Object> klients = new ArrayList<Object>();
@@ -33,35 +75,13 @@ public class piculka {
 				"Iziet no programmas"};
 		String[] picas = {"Margarita", "Studenta", "Piperoni", "Vistas","BBQ", "Assa pica"};
 		JOptionPane.showMessageDialog(null, "Sveiki picas piedages porgramma!");
-			do {
-			vards = (String)JOptionPane.showInputDialog(null, "Jūsu vārds: ");
-			}while(vards.length() <3);
 			
-			boolean pareizi = false;
-			do {
-				adrese = (String) JOptionPane.showInputDialog(null, "Ievādies savu adresi:\n(... iela ...-...)");
-				if (adrese.matches(".* iela \\d+-\\d+"))
-					pareizi = true;
-				else {
-					JOptionPane.showMessageDialog(null, "Adrese ievadita nekorekti!"
-							+ "\nPareizais variants: {ielas nosaukums} iela {ielas numurs} - {dzivoklis}");
-					pareizi = false;
-				}
-			}while(!pareizi);
+			vards = KadsVards();
+	
+			adrese = KadaAdrese();
 			
-			pareizi = false;
-			do {
-				telefons = (String)JOptionPane.showInputDialog("Ievadiet talruni: (bez +371)");
-				if (telefons.matches("2\\d{7}"))
-					pareizi = true;
-				else {
-					JOptionPane.showMessageDialog(null, "Telefona nurums ievadts nekorekti!"
-							+ "\nTelefona numura nevar būt +371 un mazāk par 8 simboliem");
-				}
-				
-			}while(!pareizi);
-			int talrun = Integer.parseInt(telefons);
-			klients.add(new Pircejs(vards, adrese, talrun));
+			talrun = KadsTalrun();
+			klients.add(new Pircejs(vards, adrese, KadsTalrun()));
 			do {
 			izvele = (String)JOptionPane.showInputDialog(null, "Izveleties funkciju:", "Izvele",
 					JOptionPane.QUESTION_MESSAGE, null, darbibas, darbibas[0]);
@@ -322,13 +342,19 @@ public class piculka {
 				int izvelesIndekss = Arrays.asList(inform).indexOf(izvele);
 				switch(izvelesIndekss) {
 				case 0:
-					
-				break;
+					vards = KadsVards();
+					((Pircejs)klients.get(0)).setVards(vards);
+					JOptionPane.showMessageDialog(null, "Vards veiksmigi nomainīts!");
+					break;
 				case 1:
-					
+					adrese = KadaAdrese();
+					((Pircejs)klients.get(0)).setAdrese(adrese);
+					JOptionPane.showMessageDialog(null, "Adrese veiksmigi nomainīta!");
 					break;
 				case 2:
-					
+					talrun = KadsTalrun();
+					((Pircejs)klients.get(0)).setTalrunis(talrun);
+					JOptionPane.showMessageDialog(null, "Talrunis veiksmigi nomainīts!");
 					break;
 				}
 				
