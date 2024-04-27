@@ -291,8 +291,7 @@ public class piculka {
 					Object sanemts = pasutijumi.get(izmers);
 					pasutijumi.remove(izmers);
 					sanemtie.add(sanemts);
-					JOptionPane.showMessageDialog(null, "Pica "+nosauk+
-							"\n saņēmta uz adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Pica "+nosauk+ "saņēmta pie adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
 				}
 				break;
 				
@@ -317,7 +316,22 @@ public class piculka {
 				break;
 				
 			case "Mainit savu info":
-				//...
+				String[] inform = {"Vards", "Adrese", "Talrunis"};
+				izvele = (String)JOptionPane.showInputDialog(null, "Kuru informāciju izmainīt?", "Mainišana",
+						JOptionPane.QUESTION_MESSAGE, null, inform, inform[0]);
+				int izvelesIndekss = Arrays.asList(inform).indexOf(izvele);
+				switch(izvelesIndekss) {
+				case 0:
+					
+				break;
+				case 1:
+					
+					break;
+				case 2:
+					
+					break;
+				}
+				
 				break;
 			case "Iziet no programmas":
 				JOptionPane.showMessageDialog(null, "Uz redzešanos!");
