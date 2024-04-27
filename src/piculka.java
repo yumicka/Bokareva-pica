@@ -1,13 +1,32 @@
+import java.awt.Component;
+import java.awt.Image;
+import java.util.Arrays;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class piculka {
+	
+	static void izvaditEkrana(String adrese) {
+		ImageIcon bilde = new ImageIcon(adrese);
+		JFrame fr = new JFrame();
+		fr.add(new JLabel(bilde));
+		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fr.setSize(624, 600);
+		fr.pack();
+		fr.setVisible(true);
+		JOptionPane.showMessageDialog(null, "Nospiediet OK, lai aizvērt un turpināt");
+		fr.setVisible(false);
+	}
 
 	public static void main(String[] args) {
 		String izvele, vards, persvards, adrese, telefons;
 		String[] persona = {"Pircejs", "Personāls"};
 		
 		String[] darbibas = {"Menu", "Iegadies picu", "Apskatīt savu info", "Mainit savu info", "Iziet no programmas"};
-		String[] picas = {"Margarita", "Studenta","Piperoni", "Vistas","BBQ", "Assa pica"};
+		String[] picas = {"Margarita", "Studenta", "Piperoni", "Vistas","BBQ", "Assa pica"};
 		JOptionPane.showMessageDialog(null, "Sveiki picas piedages porgramma!");
 		izvele = (String)JOptionPane.showInputDialog(null, "Kas jūs esat?",
 				"Reģistrācija", JOptionPane.QUESTION_MESSAGE,
@@ -50,7 +69,29 @@ public class piculka {
 			
 			case "Menu":
 				//https://stock.adobe.com/search?k=pizza+png
-				JOptionPane.showOptionDialog(null, "Apskatīt picu", "Pica", 0, JOptionPane.QUESTION_MESSAGE, null, picas, picas[0]);
+				int izveleM;
+				izveleM = JOptionPane.showOptionDialog(null, "Apskatīt picu", "Pica", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, picas, picas[0]);
+				switch(izveleM) {
+				case 0:
+					izvaditEkrana("margarita.png");
+					break;
+				case 1:
+					izvaditEkrana("studenta.png");
+					break;
+				case 2:
+					izvaditEkrana("piperoni.png");
+					break;
+				case 3:
+					izvaditEkrana("vistas.png");
+					break;
+				case 4:
+					izvaditEkrana("bbq.png");
+					break;
+				case 5:
+					izvaditEkrana("assa.png");
+					break;
+				};
 				
 				break;
 			case "Iegadies picu":
