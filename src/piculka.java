@@ -1,11 +1,12 @@
-import java.awt.Component;
-import java.awt.Image;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class piculka {
 	
@@ -24,6 +25,7 @@ public class piculka {
 	public static void main(String[] args) {
 		String izvele, vards, persvards, adrese, telefons;
 		String[] persona = {"Pircejs", "Personāls"};
+		ArrayList<Object> pasutijumi = new ArrayList<Object>();
 		
 		String[] darbibas = {"Menu", "Iegadies picu", "Apskatīt savu info", "Mainit savu info", "Iziet no programmas"};
 		String[] picas = {"Margarita", "Studenta", "Piperoni", "Vistas","BBQ", "Assa pica"};
@@ -95,8 +97,84 @@ public class piculka {
 				
 				break;
 			case "Iegadies picu":
-				//...
+				String[] picas2 = {"Margarita", "Studenta", "Piperoni", "Vistas","BBQ", "Assa pica", "Sava pica"};
+				izvele = (String)JOptionPane.showInputDialog(null, "Izvēlieties picu, kuru"
+						+ " vēlaties iegādāties:", "Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null,
+						picas2, picas2[0]);
+				if(izvele != null) {
+				int izvelesIndekss = Arrays.asList(picas2).indexOf(izvele);
+				if(izvelesIndekss == 6){
+					
+					//sastavdalas izvele
+					ArrayList<String> sastavdalas = new ArrayList<>();
+					String[] merces = {"Tomatu merce", "BQQ merce", "Majonēze"};
+					String[] piedevas = {"Kartupeļi fri", "Dzēriens", "Bez piedevām"};
+					String[] izmiers = {"30", "40", "50"};
+					String[] jane = {"Jā", "Nē"};
+					boolean dubsiers = false;
+					JCheckBox salami = new JCheckBox("Salami");
+					JCheckBox siers = new JCheckBox("Siers");
+					JCheckBox vista = new JCheckBox("Vista");
+					JCheckBox cisini = new JCheckBox("Сīsiņi");
+					JCheckBox ananasi = new JCheckBox("Ananasi");
+					JCheckBox pipari = new JCheckBox("Asie pipari");
+					JPanel sastIzvele = new JPanel();
+					sastIzvele.add(salami);
+					sastIzvele.add(siers);
+					sastIzvele.add(vista);
+					sastIzvele.add(cisini);
+					sastIzvele.add(ananasi);
+					sastIzvele.add(pipari);
+					
+					int sastavs = JOptionPane.showOptionDialog(null, sastIzvele, "Izvelies picas sastavdaļas: ",
+							JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+					
+					if (sastavs  == JOptionPane.OK_OPTION) {
+						if (salami.isSelected())
+							sastavdalas.add("Salami");
+						if(siers.isSelected())
+							sastavdalas.add("Siers");
+						if(vista.isSelected())
+							sastavdalas.add("Vista");
+						if(cisini.isSelected())
+							sastavdalas.add("Cīsiņi");
+						if(ananasi.isSelected())
+							sastavdalas.add("Ananasi");
+						if(pipari.isSelected())
+							sastavdalas.add("Assie pipāri");
+					}else 
+						JOptionPane.showMessageDialog(null, "Pasūtījums atcelts");
+					
+					//citie picas komponenti
+					String merce = (String)JOptionPane.showInputDialog(null, "Izvelies merci: ",
+							"Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null, merces, merces[0]);
+					
+					String diam = (String)JOptionPane.showInputDialog(null, "Picas izmers",
+							"Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null, izmiers, izmiers[0]);
+					int lielums = Integer.parseInt(diam);
+					
+					String piedavajums = (String)JOptionPane.showInputDialog(null, "Vai vajag piedevas?",
+							"Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null, piedevas, piedevas[0]);
+					
+					int siersJN = JOptionPane.showOptionDialog(pipari, "Vai vajāg dubulto sieru?", "Pasūtījumu noformēšana",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, jane, jane[0]);
+					
+					if(siersJN == 0)
+						dubsiers = true;
+					else
+						dubsiers = false;
+
+					pasutijumi.add(new Pica(lielums, merce, sastavdalas, dubsiers, piedavajums));
+					JOptionPane.showMessageDialog(null, "Pasūtījums ir akceptēts!");
+				}
+			}
+					
 				break;
+				
+			case "Apskatīt savu info":
+				//....
+				break;
+				
 			case "Mainit savu info":
 				//...
 				break;
