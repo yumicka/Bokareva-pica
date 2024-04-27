@@ -100,6 +100,7 @@ public class piculka {
 				String[] jane = {"Jā", "Nē"};
 				String[] pasutit = {"Saņemt uz vietas", "Piegādāt"};
 				String merce = "", nosaukums = "";
+				double cena = 3.00;
 				int lielums;
 				boolean dubsiers = false, piegade = false;
 				izvele = (String)JOptionPane.showInputDialog(null, "Izvēlieties picu, kuru"
@@ -113,12 +114,14 @@ public class piculka {
 					nosaukums = "Margarita";
 					merce = "Tomatu merce";
 					sastavdalas.add("Siers");
+					cena = cena + 1+1.50;
 				}
 				if(izvelesIndekss == 1) {
 					nosaukums = "Studenta";
 					merce = "Tomatu merce";
 					sastavdalas.add("Siers");
 					sastavdalas.add("Cīsiņi");
+					cena = cena + 1+1.50+2;
 				}
 				
 				if(izvelesIndekss == 2) {
@@ -127,6 +130,7 @@ public class piculka {
 					sastavdalas.add("Siers");
 					sastavdalas.add("Salami");
 					sastavdalas.add("Asie pipari");
+					cena = cena + 1+1.50+2+1.30;
 				}
 				
 				if(izvelesIndekss == 3) {
@@ -135,6 +139,7 @@ public class piculka {
 					sastavdalas.add("Siers");
 					sastavdalas.add("Vista");
 					sastavdalas.add("Ananasi");
+					cena = cena + 1.50+1.20+3+2.10;
 				}
 				
 				if(izvelesIndekss == 4) {
@@ -144,6 +149,7 @@ public class piculka {
 					sastavdalas.add("Vista");
 					sastavdalas.add("Ananasi");
 					sastavdalas.add("Asie pipari");
+					cena = cena+2+1.20+3+2.10+1.30;
 				}
 				
 				if(izvelesIndekss == 5) {
@@ -153,6 +159,7 @@ public class piculka {
 					sastavdalas.add("Asie pipari");
 					sastavdalas.add("Cīsiņi");
 					sastavdalas.add("Salami");
+					cena = cena + 1.50 +1.20+1.30+2+2;
 					
 				}
 				
@@ -181,51 +188,81 @@ public class piculka {
 							JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 					
 					if (sastavs  == JOptionPane.OK_OPTION) {
-						if (salami.isSelected())
+						if (salami.isSelected()) {
 							sastavdalas.add("Salami");
-						if(siers.isSelected())
+							cena = cena + 2;
+						}
+						if(siers.isSelected()) {
 							sastavdalas.add("Siers");
-						if(vista.isSelected())
+							cena = cena +1.20;
+						}
+						if(vista.isSelected()) {
 							sastavdalas.add("Vista");
-						if(cisini.isSelected())
+							cena = cena + 3;
+						}
+						if(cisini.isSelected()) {
 							sastavdalas.add("Cīsiņi");
-						if(ananasi.isSelected())
+							cena = cena + 2;
+						}
+						if(ananasi.isSelected()) {
 							sastavdalas.add("Ananasi");
-						if(pipari.isSelected())
+							cena = cena + 2.10;
+						}
+						if(pipari.isSelected()) {
 							sastavdalas.add("Assie pipāri");
+							cena = cena + 1.30;
+						}
 					}else 
 						JOptionPane.showMessageDialog(null, "Pasūtījums atcelts");
 					
 					//citie picas komponenti
 					merce = (String)JOptionPane.showInputDialog(null, "Izvelies merci: ",
 							"Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null, merces, merces[0]);
-					
+					if(merce.equals("Tomatu merce"))
+						cena = cena + 1;
+					if(merce.equals("BBQ merce"))
+						cena = cena + 2;
+					if(merce.equals("Majonēze"))
+						cena = cena + 1.50;
 				}
 				
 					String diam = (String)JOptionPane.showInputDialog(null, "Picas izmers",
 							"Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null, izmiers, izmiers[0]);
 					lielums = Integer.parseInt(diam);
+					if(lielums == 30)
+						cena = cena + 1;
+					if(lielums == 40)
+						cena = cena + 2;
+					if(lielums == 50)
+						cena = cena + 2.50;
 					
 					String piedavajums = (String)JOptionPane.showInputDialog(null, "Vai vajag piedevas?",
 							"Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null, piedevas, piedevas[0]);
+					if(piedavajums.equals("Kartupeļi fri"))
+						cena = cena + 1.50;
+					if(piedavajums.equals("Dzēriens"))
+						cena = cena + 1;
 					
 					int siersJN = JOptionPane.showOptionDialog(null, "Vai vajāg dubulto sieru?", "Pasūtījumu noformēšana",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, jane, jane[0]);
 					
-					if(siersJN == 0)
+					if(siersJN == 0) {
 						dubsiers = true;
-					else
+						cena = cena + 1;
+					}else
 						dubsiers = false;
 					
 					int pieg = JOptionPane.showOptionDialog(null, "Kā saņiemsiet pasutījumu?", "Pasūtījumu noformēšana",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, pasutit, pasutit[0]);
-					if(pieg == 0)
+					if(pieg == 0) {
 						piegade = true;
+						cena = cena + 2;
+					}
 					if(pieg == 1)
 						piegade = false;
 
-					pasutijumi.add(new Pica(nosaukums, lielums, merce, sastavdalas, dubsiers, piedavajums, piegade));
-					JOptionPane.showMessageDialog(null, "Pasūtījums ir akceptēts!");
+					pasutijumi.add(new Pica(nosaukums, lielums, cena, merce, sastavdalas, dubsiers, piedavajums, piegade));
+					JOptionPane.showMessageDialog(null, "Pasūtījums ir akceptēts!\nCena: "+cena);
 				
 			}
 				break;
@@ -242,6 +279,10 @@ public class piculka {
 				}else
 					JOptionPane.showMessageDialog(null, "Nav nepiegādātu pasūtījumu!",
 							"Pasūtijumus nav", JOptionPane.ERROR_MESSAGE);
+				break;
+				
+			case "Saņemt pasūtijumu":
+				//...
 				break;
 				
 			case "Apskatīt savu info":

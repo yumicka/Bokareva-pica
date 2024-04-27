@@ -5,11 +5,13 @@ public class Pica {
 	private int lielums;
 	private String piedevas, merce, nosaukums;
 	private boolean dubSiers, piegade;
+	private double cena;
 	private ArrayList<String> sastavdalas;
 	//konstruktors
-	public Pica(String nosaukums, int lielums, String merce, ArrayList<String> sastavdalas, boolean dubSiers, String piedevas, boolean piegade) {
+	public Pica(String nosaukums, int lielums, double cena, String merce, ArrayList<String> sastavdalas, boolean dubSiers, String piedevas, boolean piegade) {
 		this.nosaukums = nosaukums;
 		this.lielums = lielums;
+		this.cena = cena;
 		this.merce = merce;
 		this.sastavdalas = sastavdalas;
 		this.dubSiers = dubSiers;
@@ -22,6 +24,10 @@ public class Pica {
 	}
 	public int getLielums() {
 		return lielums;
+	}
+	
+	public double getCena() {
+		return cena;
 	}
 	
 	public String getMerce() {
@@ -61,6 +67,7 @@ public class Pica {
 	    		"\nPicas izmērs: "+getLielums()+"cm"
 	    		+"\nDubultais siers: "+getDubSiers()+
 	    		"\nPiedevas: "+getPiedevas()+
+	    		"\nCena: "+getCena()+
 	    		"\nSaņemšana: "+getPiegade();
 	  }
 }
