@@ -25,9 +25,11 @@ public class piculka {
 	public static void main(String[] args) {
 		String izvele, vards, persvards, adrese, telefons;
 		ArrayList<Object> pasutijumi = new ArrayList<Object>();
+		ArrayList<Object> sanemtie = new ArrayList<Object>();
 		ArrayList<Object> klients = new ArrayList<Object>();
 		
-		String[] darbibas = {"Menu", "Iegadies picu", "Apskatīt pasūtijumus", "Saņemt pasūtijumu", "Apskatīt savu info", "Mainit savu info",
+		
+		String[] darbibas = {"Menu", "Iegadies picu", "Apskatīt pasūtijumus", "Saņemt pasūtijumu", "Saņemtie pasutījumi" ,"Apskatīt savu info", "Mainit savu info",
 				"Iziet no programmas"};
 		String[] picas = {"Margarita", "Studenta", "Piperoni", "Vistas","BBQ", "Assa pica"};
 		JOptionPane.showMessageDialog(null, "Sveiki picas piedages porgramma!");
@@ -282,7 +284,19 @@ public class piculka {
 				break;
 				
 			case "Saņemt pasūtijumu":
-				//...
+				if(pasutijumi.size() > 0) {
+					int izmers = pasutijumi.size() - 1;
+					String nosauk = ((Pica)pasutijumi.get(izmers)).getNosaukums();
+					String adresik = ((Pircejs)klients.get(0)).getVards();
+					Object sanemts = pasutijumi.get(izmers);
+					pasutijumi.remove(izmers);
+					sanemtie.add(sanemts);
+					JOptionPane.showMessageDialog(null, "Nosutīta pica: "+nosauk+
+							"\nUz adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
+				}
+				break;
+				
+			case "Saņemtie pasutījumi":
 				break;
 				
 			case "Apskatīt savu info":
