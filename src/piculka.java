@@ -245,7 +245,9 @@ public class piculka {
 				break;
 				
 			case "Apskatīt savu info":
-				//....
+				String str = "";
+				str += ((Pircejs)klients.get(0)).info();
+				JOptionPane.showMessageDialog(null, str, "Informacija", JOptionPane.INFORMATION_MESSAGE);
 				break;
 				
 			case "Mainit savu info":
