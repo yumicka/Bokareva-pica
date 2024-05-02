@@ -1,18 +1,6 @@
 Adresāts: Alina
 Adrese: silku iela 15-48
 Talrunis: +37127793020
-Picas nosaukums: Margarita
-Picas sastavdaļas: Siers | 
-Picas merce: Tomatu merce
-Picas izmērs: 40cm
-Dubultais siers: Jā
-Piedevas: Dzēriens
-Cena: 11.5
-Saņemšana: Uz vietas
-
-Adresāts: Alina
-Adrese: silku iela 15-48
-Talrunis: +37127793020
 Picas nosaukums: Pašī izveidota
 Picas sastavdaļas: Vista | Ananasi | 
 Picas merce: BBQ merce

@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -325,13 +327,20 @@ public class piculka {
 				
 			case "Apskatīt pasūtijumus":
 				if(pasutijumi.size() > 0) {
-				String saraksts = "";
-				for(int i = 0; i<pasutijumi.size(); i++) {
-					saraksts+=((Pircejs)klients.get(0)).info();
-					saraksts+= ((Pica)pasutijumi.get(i)).info()+"\n\n";
+					String teksts, str = "";
+					try {
+						FileReader fr = new FileReader("Picas.txt");
+						BufferedReader br = new BufferedReader(fr);
+						while((teksts = br.readLine()) != null) {
+							str += teksts+" "+"\n";	
+						}
+						br.close();
+						JOptionPane.showMessageDialog(null, str, "Pasutījumi", JOptionPane.INFORMATION_MESSAGE);
+						
+						
+					}catch(IOException e){
+						JOptionPane.showMessageDialog(null, "Radās kļūda nolasot faili!", "Kļūda", JOptionPane.ERROR_MESSAGE);
 					}
-					JOptionPane.showMessageDialog(null, saraksts, "Pasutījumi", JOptionPane.INFORMATION_MESSAGE);
-					
 				}else
 					JOptionPane.showMessageDialog(null, "Nav nepiegādātu pasūtījumu!",
 							"Pasūtijumus nav", JOptionPane.ERROR_MESSAGE);
@@ -345,24 +354,51 @@ public class piculka {
 					Object sanemts = pasutijumi.get(izmers);
 					pasutijumi.remove(izmers);
 					sanemtie.add(sanemts);
+					try {
+						FileWriter fw = new FileWriter("Sanemtas.txt", true);
+						PrintWriter pw = new PrintWriter(fw);
+						String saraksts = "";
+						
+						int lielum = sanemtie.size();
+						saraksts+=((Pircejs)klients.get(0)).info();
+						if (!sanemtie.isEmpty()) {
+						    saraksts += ((Pica) sanemtie.get(lielum-1)).info();
+						}
+						pw.println(saraksts);
+						pw.println();
+						pw.close();	
+					}catch(IOException e) {
+					JOptionPane.showMessageDialog(null, "Radās kļūda saglabājot failā!",
+							"Kļūda", JOptionPane.ERROR_MESSAGE);
+				}
+					
 					JOptionPane.showMessageDialog(null, "Pica "+nosauk+ " saņēmta pa adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
 					break;
 				}else {
 					JOptionPane.showMessageDialog(null, "Nav pasutijumus");
 				}
+				break;
 				
 			case "Saņemtie pasutījumi":
 				if(sanemtie.size() > 0) {
-					String saraksts = "";
-					for(int i = 0; i<sanemtie.size(); i++) {
-						saraksts+=((Pircejs)klients.get(i)).info();
-						saraksts+= ((Pica)sanemtie.get(i)).info();
+					
+					String teksts, str = "";
+					try {
+						FileReader fr = new FileReader("Sanemtas.txt");
+						BufferedReader br = new BufferedReader(fr);
+						while((teksts = br.readLine()) != null) {
+							str += teksts+" "+"\n";	
 						}
-						JOptionPane.showMessageDialog(null, saraksts, "Saņemtie pasutījumi", JOptionPane.INFORMATION_MESSAGE);
+						br.close();
+						JOptionPane.showMessageDialog(null, str, "Saņemtie pasutījumi", JOptionPane.INFORMATION_MESSAGE);
 						
-					}else
-						JOptionPane.showMessageDialog(null, "Nav piegādātus pasūtījumus!",
-								"Pasūtijumus nav", JOptionPane.ERROR_MESSAGE);
+						
+					}catch(IOException e){
+						JOptionPane.showMessageDialog(null, "Radās kļūda nolasot faili!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+					}
+				}else
+					JOptionPane.showMessageDialog(null, "Nav piegādātus pasūtījumus!",
+							"Pasūtijumus nav", JOptionPane.ERROR_MESSAGE);
 				break;
 				
 			case "Apskatīt savu info":
