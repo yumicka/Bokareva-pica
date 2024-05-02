@@ -1,0 +1,24 @@
+Adresāts: Фдштф
+Adrese: silku iela 15-48
+Talrunis: +37127793020
+Picas nosaukums: Studenta
+Picas sastavdaļas: Siers | Cīsiņi | 
+Picas merce: Tomatu merce
+Picas izmērs: 40cm
+Dubultais siers: Jā
+Piedevas: Bez piedevām
+Cena: 12.5
+Saņemšana: Uz vietas
+
+Adresāts: Фдштф
+Adrese: silku iela 15-48
+Talrunis: +37127793020
+Picas nosaukums: Pašī izveidota
+Picas sastavdaļas: Siers | Cīsiņi | 
+Picas merce: BBQ merce
+Picas izmērs: 50cm
+Dubultais siers: Nē
+Piedevas: Dzēriens
+Cena: 13.7
+Saņemšana: Uz vietas
+

@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -136,7 +139,7 @@ public class piculka {
 						+ " vēlaties iegādāties:", "Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null,
 						picas2, picas2[0]);
 				if(izvele1 != null) {
-				int izvelesIndekss = Arrays.asList(picas2).indexOf(izvele);
+				int izvelesIndekss = Arrays.asList(picas2).indexOf(izvele1);
 				
 				
 				if(izvelesIndekss == 0) {
@@ -268,8 +271,6 @@ public class piculka {
 					if(lielums == 50)
 						cena = cena + 2.50;
 					
-						
-					
 					String piedavajums = (String)JOptionPane.showInputDialog(null, "Vai vajag piedevas?",
 							"Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null, piedevas, piedevas[0]);
 					if(piedavajums.equals("Kartupeļi fri"))
@@ -289,13 +290,33 @@ public class piculka {
 					int pieg = JOptionPane.showOptionDialog(null, "Kā saņiemsiet pasutījumu?", "Pasūtījumu noformēšana",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, pasutit, pasutit[0]);
 					if(pieg == 0) {
-						piegade = true;
-						cena = cena + 2;
-					}
-					if(pieg == 1)
 						piegade = false;
+					}
+					if(pieg == 1) {
+						piegade = true;
+						cena = cena + 2; //pievienoju maksajumu par piegadi
+					}
 
 					pasutijumi.add(new Pica(nosaukums, lielums, cena, merce, sastavdalas, dubsiers, piedavajums, piegade));
+						
+						try {
+							FileWriter fw = new FileWriter("Picas.txt", true);
+							PrintWriter pw = new PrintWriter(fw);
+							String saraksts = "";
+							
+							int lielum = pasutijumi.size();
+							saraksts+=((Pircejs)klients.get(0)).info();
+							if (!pasutijumi.isEmpty()) {
+							    saraksts += ((Pica) pasutijumi.get(lielum-1)).info();
+							}
+							pw.println(saraksts);
+							pw.println();
+							pw.close();	
+						}catch(IOException e) {
+							JOptionPane.showMessageDialog(null, "Radās kļūda saglabājot failā!",
+									"Kļūda", JOptionPane.ERROR_MESSAGE);
+						}
+					
 					JOptionPane.showMessageDialog(null, "Pasūtījums ir akceptēts!\nCena: "+cena);
 					break;
 				
@@ -325,8 +346,10 @@ public class piculka {
 					pasutijumi.remove(izmers);
 					sanemtie.add(sanemts);
 					JOptionPane.showMessageDialog(null, "Pica "+nosauk+ " saņēmta pa adresi: "+adresik, "Prece ir nosutita", JOptionPane.INFORMATION_MESSAGE);
+					break;
+				}else {
+					JOptionPane.showMessageDialog(null, "Nav pasutijumus");
 				}
-				break;
 				
 			case "Saņemtie pasutījumi":
 				if(sanemtie.size() > 0) {
