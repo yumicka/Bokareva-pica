@@ -88,7 +88,7 @@ public class piculka {
 			
 			vards = KadsVards();
 	
-			adrese = KadaAdrese();
+			adrese = "Nav nepieciešama adrese";
 			
 			talrun = KadsTalrun();
 			
@@ -293,10 +293,12 @@ public class piculka {
 							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, pasutit, pasutit[0]);
 					if(pieg == 0) {
 						piegade = false;
+						adrese = "Nav nepieciešama adrese";
 					}
 					if(pieg == 1) {
 						piegade = true;
 						cena = cena + 2; //pievienoju maksajumu par piegadi
+						adrese = KadaAdrese();
 					}
 
 					pasutijumi.add(new Pica(nosaukums, lielums, cena, merce, sastavdalas, dubsiers, piedavajums, piegade));
