@@ -23,9 +23,11 @@ public class piculka {
 	}
 	
 	static String KadsVards() {
-		String vards;
+		String vards = "";
 		do {
 			vards = (String)JOptionPane.showInputDialog(null, "Jūsu vārds: ");
+			if(vards == null)
+				vards = "lietotajs";
 			}while(vards.length() <3);
 		return vards;
 	}
@@ -126,13 +128,14 @@ public class piculka {
 				String[] jane = {"Jā", "Nē"};
 				String[] pasutit = {"Saņemt uz vietas", "Piegādāt"};
 				String merce = "", nosaukums = "";
+				String izvele1;
 				double cena = 3.00;
 				int lielums;
 				boolean dubsiers = false, piegade = false;
-				izvele = (String)JOptionPane.showInputDialog(null, "Izvēlieties picu, kuru"
+				izvele1 = (String)JOptionPane.showInputDialog(null, "Izvēlieties picu, kuru"
 						+ " vēlaties iegādāties:", "Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null,
 						picas2, picas2[0]);
-				if(izvele != null) {
+				if(izvele1 != null) {
 				int izvelesIndekss = Arrays.asList(picas2).indexOf(izvele);
 				
 				
@@ -238,8 +241,11 @@ public class piculka {
 							sastavdalas.add("Assie pipāri");
 							cena = cena + 1.30;
 						}
-					}else 
+					}else {
 						JOptionPane.showMessageDialog(null, "Pasūtījums atcelts");
+						break;
+					}
+						
 					
 					//citie picas komponenti
 					merce = (String)JOptionPane.showInputDialog(null, "Izvelies merci: ",
@@ -261,6 +267,8 @@ public class piculka {
 						cena = cena + 2;
 					if(lielums == 50)
 						cena = cena + 2.50;
+					
+						
 					
 					String piedavajums = (String)JOptionPane.showInputDialog(null, "Vai vajag piedevas?",
 							"Pasūtījumu noformēšana", JOptionPane.QUESTION_MESSAGE, null, piedevas, piedevas[0]);
@@ -289,8 +297,9 @@ public class piculka {
 
 					pasutijumi.add(new Pica(nosaukums, lielums, cena, merce, sastavdalas, dubsiers, piedavajums, piegade));
 					JOptionPane.showMessageDialog(null, "Pasūtījums ir akceptēts!\nCena: "+cena);
+					break;
 				
-			}
+			}else if (izvele1 == null)
 				break;
 				
 			case "Apskatīt pasūtijumus":
